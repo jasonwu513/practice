@@ -1,0 +1,168 @@
+﻿<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv="Content-Language" content="zh-tw" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>未命名 1</title>
+	<style type="text/css">
+		.style1 {
+			text-align: center;
+		}
+
+		.style2 {
+			line-height: 200%;
+		}
+
+		.style3 {
+			font-size: large;
+		}
+	</style>
+
+
+
+</head>
+
+<body>
+
+	<p class="style3"><strong>撲克牌賭博遊戲</strong></p>
+	<p>
+	<table style="width: 390px">
+		<tr>
+			<td style="width: 90px">
+				<p class="style2"></p>
+			</td>
+			<td style="width: 150px" class="style1">
+				<p class="style2">自己</p>
+			</td>
+			<td style="width: 150" class="style1">
+				<p class="style2">莊家</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 90px">
+				<p class="style2"></p>
+			</td>
+			<td style="width: 150" class="style1">
+				<p class="style2">
+					<img id="myImg" alt="card" src="0.gif" width="100" height="134" />
+				</p>
+			</td>
+			<td style="width: 150" class="style1">
+				<p class="style2">
+					<img id="bookieImg" alt="card" src="0.gif" width="100" height="134" />
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 90px">
+				<p class="style2">桌上的錢</p>
+			</td>
+			<td style="width: 150" class="style1">
+				<p class="style2">
+					<input id="myMoney" name="T1" type="text" size="6" value="10" />
+				</p>
+			</td>
+			<td style="width: 150" class="style1">
+				<p class="style2">
+					<input id="bookieMoney" name="T2" type="text" size="6" value="10" />
+				</p>
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 90px">
+				<p class="style2">賭注</p>
+			</td>
+			<td style="width: 150" class="style1">
+				<p class="style2">
+					<input id="bet" name="T3" type="text" size="6" value="1" />
+				</p>
+			</td>
+			<td style="width: 150" class="style1">
+				<p class="style2"></p>
+			</td>
+		</tr>
+		<tr>
+			<td style="width: 90px">
+				<p class="style2"></p>
+			</td>
+			<td style="width: 150" class="style1">
+				<p class="style2">
+					<input id="licensingButton" name="B1" type="button" value="發牌 "  onclick="licensing()"/>
+				</p>
+			</td>
+			<td style="width: 150" class="style1">
+				<p class="style2">
+					<input id="foldButton" name="B2" type="button" value="蓋牌 "  onclick="turnToback()"/>
+				</p>
+			</td>
+		</tr>
+	</table>
+	</p>
+
+	<script>
+		var isfolded = true;
+		var totalCards = [1,2,3,4,5,6,7,8,9,10,11,12,13]
+		var bookieCard 
+		var yourCard
+		
+
+		console.log(bet)
+
+		function turnToback() {
+			// 將圖片恢復成背面
+			document.getElementById("myImg").src =  "0.gif";
+			document.getElementById("bookieImg").src =  "0.gif";
+
+			// 是否蓋過牌變數修改
+
+			isfolded = true
+		}
+
+		function licensing () {
+			// 本局賭注
+			var bet = parseInt(document.getElementById('bet').value)
+			// 自己桌上的錢
+			var myMoney = parseInt(document.getElementById('myMoney').value)
+			// 莊家桌上的錢
+			var bookieMoney = parseInt(document.getElementById('bookieMoney').value)
+
+			// 確認是否蓋牌
+			if (isfolded != true) {
+				alert('你（妳）必須先按「蓋牌」，才能重新發牌')
+				return false
+			}
+			// 從 0-12位置隨機抽一張牌
+			var first_card_index = Math.floor(Math.random() * 13) + 1 - 1
+			yourCard = totalCards[first_card_index]
+			// 將被抽到的牌從牌組中移除
+			totalCards.splice(first_card_index, 1)
+			// 從 0-11位置隨機抽一張牌
+			var second_card_index = Math.floor(Math.random() * 12) + 1 - 1
+			bookieCard = totalCards[second_card_index]
+			// 換圖
+			document.getElementById("myImg").src = yourCard + ".gif";
+			document.getElementById("bookieImg").src = bookieCard + ".gif";
+
+			if (yourCard > bookieCard) {
+				myMoney += bet
+				bookieMoney -= bet
+			} else {
+				myMoney -= bet
+				bookieMoney += bet
+			}
+
+			document.getElementById('myMoney').value = myMoney
+			document.getElementById('bookieMoney').value = bookieMoney
+
+			isfolded = false
+
+			// 將卡片歸還牌組
+			totalCards = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+		}
+	</script>
+
+</body>
+
+</html>

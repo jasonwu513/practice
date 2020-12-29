@@ -1,0 +1,139 @@
+﻿<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:m="http://schemas.microsoft.com/office/2004/12/omml"
+	xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>未命名 1</title>
+	<style type="text/css">
+		p.MsoNormal {
+			margin-bottom: .0001pt;
+			font-size: 12.0pt;
+			font-family: "Calibri", sans-serif;
+			margin-left: 0cm;
+			margin-right: 0cm;
+			margin-top: 0cm;
+		}
+
+		.style1 {
+			margin-left: 40px;
+		}
+	</style>
+
+
+
+</head>
+
+<body>
+
+	<p>單選題 （每題20分，滿分100分）</p>
+	<p><br />
+		1. 甲氣體1升，剛好能與乙氣體3升化合，以產生丙氣體2升。若甲氣體的分子式為A3（即三原子分子），則乙氣體的分子式可能是下列的那一個？<br />
+		<input name="t1" type="radio" value="A" />(A) AB　<br />
+		<input name="t1" type="radio" value="B" />(B) AB2　<br />
+		<input name="t1" type="radio" value="C" />(C) A2B　<br />
+		<input name="t1" type="radio" value="D" />(D) A2B2
+	</p><br />
+	<p>
+		2. 小明的紅血球在不同濃度的蔗糖液中，浸泡半小時之後的結果如下圖。依照血球外形的變化判斷蔗糖液的濃度，由高而低排列，何者正確？&nbsp;</p>
+	<p class="style1"><img alt="cell" src="Q1-2.jpg" width="400" height="138" /></p>
+	<p><br />
+		<input name="t2" type="radio" value="A" />(A)甲＞乙＞丙＞丁　<br />
+		<input name="t2" type="radio" value="B" />(B)丁＞甲＞乙＞丙<br />
+		<input name="t2" type="radio" value="C" />(C)丙＞丁＞甲＞乙　<br />
+		<input name="t2" type="radio" value="D" />(D)丙＞乙＞丁＞甲
+	</p><br />
+	<p>
+		3. 實驗式為C4H6的1,3－丁二烯1莫耳完全燃燒，可得二氧化碳及水蒸氣總共多少莫耳？<br />
+		<input name="t3" type="radio" value="A" />(A) 4<br />
+		<input name="t3" type="radio" value="B" />(B) 5<br />
+		<input name="t3" type="radio" value="C" />(C) 6<br />
+		<input name="t3" type="radio" value="D" />(D) 7<br />
+	</p><br />
+	<p>
+		4. 下列那一組的化合物，其組成不能以倍比定律說明？<br />
+		<input name="t4" type="radio" value="A" />(A)氧及臭氧<br />
+		<input name="t4" type="radio" value="B" />(B)一氧化碳及二氧化碳<br />
+		<input name="t4" type="radio" value="C" />(C)水及過氧化氫<br />
+		<input name="t4" type="radio" value="D" />(D)一氧化二氮及二氧化氮<br />
+	</p><br />
+	<p>
+		5. 下列那一種化學反應不是氧化還原反應？<br />
+		<input name="t5" type="radio" value="A" />(A)由水蒸氣及紅熱的焦煤製造水煤氣（主要成分含一氧化碳及氫）<br />
+		<input name="t5" type="radio" value="B" />(B)鋅片溶於稀硫酸放出氫<br />
+		<input name="t5" type="radio" value="C" />(C)碳酸鈣溶於鹽酸放出二氧化碳<br />
+		<input name="t5" type="radio" value="D" />(D)由氮及氫以哈柏法製氨以哈柏法製氨<br />
+	</p><br />
+
+	<p><input name="Button1" type="button" value="檢查答案" onclick="checkAns()" />&nbsp;</p>
+
+	<p>考試結果：</p>
+	<p>答對題數：<input id="correctAnsNumber" name="Text1" type="text" /></p>
+	<p>答錯題數：<input id="wrongAnsNumber" name="Text1" type="text" /></p>
+	<p>沒答題數：<input id="nonAnsNumber" name="Text1" type="text" /></p>
+	<p>應得分數：<input id="score" name="Text1" type="text" /></p>
+	<br />
+	<br />
+
+	<script>
+		var correctt = 0
+		var wrongg = 0
+		var noans = 0
+		var grade = 0
+		// 正解
+		var correctAns = ['B', 'D', 'D', 'A', 'C']
+		// 取得各題提交答案的function 
+		function getAns(name) {
+			var elements = document.getElementsByName(name);
+			console.log(name)
+			// 因getElementsByName 返回陣列, 一個一個檢查是否有值並回傳, 如果都沒有check 的value 最後回傳0
+			for (var i = 0, len = elements.length; i < len; ++i)
+				if (elements[i].checked) {
+					console.log(elements[i].value)
+					return elements[i].value;
+				}
+				return 0
+		}
+		
+		function checkAns() {
+			// 取得各題回復答案 並置入陣列 anns
+			var a1 = getAns('t1')
+			var a2 = getAns('t2')
+			var a3 = getAns('t3')
+			var a4 = getAns('t4')
+			var a5 = getAns('t5')
+
+			var anss = [a1, a2, a3, a4, a5]
+
+			for (let index = 0; index < anss.length; index++) {
+				//  如果沒選擇答案 noans +1
+				if (anss[index] === 0) {
+					noans += 1
+				//  如果選擇正確答案 correctt +1
+				} else if (anss[index] == correctAns[index]) {
+					correctt += 1
+				// 剩下的 wrongg +1 
+				} else wrongg += 1
+			}
+			// 每題 20 分
+			grade = correctt * 20
+
+			document.getElementById("correctAnsNumber").value =  correctt
+			document.getElementById("wrongAnsNumber").value =  wrongg
+			document.getElementById("nonAnsNumber").value =  noans
+			document.getElementById("score").value =  grade
+
+			// 重置變數 
+			correctt = 0
+			wrongg = 0
+			noans = 0
+			grade = 0
+		}
+	</script>
+
+
+
+</body>
+
+</html>
